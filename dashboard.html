@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Dashboard</title>
+<link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+<div class="app">
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-logo">EduTrack<span>Student Portal</span></div>
+  </div>
+  <div class="student-mini">
+    <div class="avatar">ST</div>
+    <div class="student-mini-info">
+      <strong>Student</strong>
+      <span>21CS047 · CSE</span>
+    </div>
+  </div>
+  <nav class="nav">
+    <div class="nav-section">Main</div>
+    <div class="nav-item active" onclick="showPage('overview')">
+      <span class="nav-icon">◈</span> Overview
+    </div>
+    <div class="nav-item" onclick="showPage('attendance')">
+      <span class="nav-icon">◷</span> Attendance
+    </div>
+    <div class="nav-item" onclick="showPage('marks')">
+      <span class="nav-icon">◎</span> Marks & Grades
+    </div>
+    <div class="nav-item" onclick="showPage('performance')">
+      <span class="nav-icon">◈</span> Performance
+    </div>
+    <div class="nav-section">Documents</div>
+    <div class="nav-item" onclick="showPage('certificates')">
+      <span class="nav-icon">◉</span> Certificates
+    </div>
+    <div class="nav-item" onclick="showPage('marksheets')">
+      <span class="nav-icon">▣</span> Marksheets
+    </div>
+    <div class="nav-section">Profile</div>
+    <div class="nav-item" onclick="showPage('profile')">
+      <span class="nav-icon">◯</span> Personal Details
+    </div>
+  </nav>
+  <div class="sidebar-footer">
+    <span>Academic Year 2023–24</span>
+    <button class="logout-btn" onclick="logout()">Logout</button>
+  </div>
+</aside>
+<div class="sidebar-backdrop" onclick="closeSidebar()"></div>
+
+<!-- MAIN CONTENT -->
+<main class="main">
+
+  <!-- ===== OVERVIEW PAGE ===== -->
+  <div class="page active" id="page-overview">
+    <div class="topbar">
+      <div style="display: flex; align-items: flex-start;">
+        <button class="mobile-menu-btn" onclick="toggleSidebar()" aria-label="Open menu">☰</button>
+        <div>
+          <div class="page-title">Good Morning, Student 👋</div>
+          <div class="page-subtitle">Here's your academic snapshot for today</div>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <div class="sem-badge">Semester VI</div>
+        <div class="notif-btn" onclick="showPage('overview')">🔔<span class="notif-badge">3</span></div>
+      </div>
+    </div>
+
+    <!-- STATS -->
+    <div class="grid4 gap">
+      <div class="stat-card accent-green">
+        <div class="stat-label">Attendance</div>
+        <div class="stat-num">87%</div>
+        <div class="stat-detail">142 / 163 days present</div>
+      </div>
+      <div class="stat-card accent-gold">
+        <div class="stat-label">Current CGPA</div>
+        <div class="stat-num">8.74</div>
+        <div class="stat-detail">Rank #12 in class</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Credits Earned</div>
+        <div class="stat-num">142</div>
+        <div class="stat-detail">of 180 total credits</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Backlogs</div>
+        <div class="stat-num">0</div>
+        <div class="stat-detail">All subjects cleared</div>
+      </div>
+    </div>
+
+    <div class="grid2 gap">
+      <!-- Subject Performance -->
+      <div class="card">
+        <div class="section-title">Current Semester Subjects</div>
+        <div class="progress-wrap">
+          <div class="progress-header"><span class="progress-label">Machine Learning</span><span class="progress-val" style="color:var(--accent)">92/100</span></div>
+          <div class="progress-bar"><div class="progress-fill fill-green" style="width:92%"></div></div>
+        </div>
+        <div class="progress-wrap">
+          <div class="progress-header"><span class="progress-label">Computer Networks</span><span class="progress-val" style="color:var(--blue)">85/100</span></div>
+          <div class="progress-bar"><div class="progress-fill fill-blue" style="width:85%"></div></div>
+        </div>
+        <div class="progress-wrap">
+          <div class="progress-header"><span class="progress-label">Software Engineering</span><span class="progress-val" style="color:var(--accent2)">78/100</span></div>
+          <div class="progress-bar"><div class="progress-fill fill-amber" style="width:78%"></div></div>
+        </div>
+        <div class="progress-wrap">
+          <div class="progress-header"><span class="progress-label">Database Systems</span><span class="progress-val" style="color:var(--accent)">88/100</span></div>
+          <div class="progress-bar"><div class="progress-fill fill-green" style="width:88%"></div></div>
+        </div>
+        <div class="progress-wrap" style="margin-bottom:0">
+          <div class="progress-header"><span class="progress-label">Cloud Computing</span><span class="progress-val" style="color:var(--accent3)">72/100</span></div>
+          <div class="progress-bar"><div class="progress-fill fill-red" style="width:72%"></div></div>
+        </div>
+      </div>
+
+      <!-- Notifications + Quick Links -->
+      <div>
+        <div class="card" style="margin-bottom:16px">
+          <div class="section-title">Recent Notifications</div>
+          <div class="notif">
+            <div class="notif-dot" style="background:var(--accent3)"></div>
+            <div><div class="notif-text">Internal Assessment marks for Machine Learning uploaded</div><div class="notif-time">Today, 10:30 AM</div></div>
+          </div>
+          <div class="notif">
+            <div class="notif-dot" style="background:var(--accent2)"></div>
+            <div><div class="notif-text">Attendance is below 85% in Cloud Computing — attend classes</div><div class="notif-time">Yesterday</div></div>
+          </div>
+          <div class="notif">
+            <div class="notif-dot" style="background:var(--accent)"></div>
+            <div><div class="notif-text">Semester V marksheet is available for download</div><div class="notif-time">2 days ago</div></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="section-title">Quick Actions</div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <button class="dl-btn dl-btn-primary" onclick="showPage('marksheets')" style="justify-content:center">⬇ Download Latest Marksheet</button>
+            <button class="dl-btn dl-btn-secondary" onclick="showPage('certificates')" style="justify-content:center">🏅 View Certificates</button>
+            <button class="dl-btn dl-btn-secondary" onclick="showPage('attendance')" style="justify-content:center">📅 Check Attendance</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CGPA Trend -->
+    <div class="card">
+      <div class="section-title">CGPA Progression — All Semesters</div>
+      <div class="chart-bar-wrap">
+        <div class="chart-bar-col">
+          <div class="chart-bar-val">7.8</div>
+          <div class="chart-bar fill-blue" style="height:68%"></div>
+          <div class="chart-bar-label">Sem I</div>
+        </div>
+        <div class="chart-bar-col">
+          <div class="chart-bar-val">8.1</div>
+          <div class="chart-bar fill-blue" style="height:74%"></div>
+          <div class="chart-bar-label">Sem II</div>
+        </div>
+        <div class="chart-bar-col">
+          <div class="chart-bar-val">8.3</div>
+          <div class="chart-bar fill-blue" style="height:78%"></div>
+          <div class="chart-bar-label">Sem III</div>
+        </div>
+        <div class="chart-bar-col">
+          <div class="chart-bar-val">8.5</div>
+          <div class="chart-bar fill-green" style="height:82%"></div>
+          <div class="chart-bar-label">Sem IV</div>
+        </div>
+        <div class="chart-bar-col">
+          <div class="chart-bar-val">8.9</div>
+          <div class="chart-bar fill-green" style="height:90%"></div>
+          <div class="chart-bar-label">Sem V</div>
+        </div>
+        <div class="chart-bar-col">
+          <div class="chart-bar-val">8.74</div>
+          <div class="chart-bar fill-amber" style="height:86%"></div>
+          <div class="chart-bar-label">Sem VI</div>
+        </div>
+      </div>
+      <div class="chart-axis"></div>
+    </div>
+  </div>
+
+  <!-- ===== ATTENDANCE PAGE ===== -->
+  <div class="page" id="page-attendance">
+    <div class="page-header">
+      <button class="mobile-menu-btn" onclick="toggleSidebar()" aria-label="Open menu">☰</button>
+      <div>
+        <div class="page-title">Attendance Tracker</div>
+        <div class="page-subtitle">Detailed attendance by subject and calendar view</div>
+      </div>
+    </div>
+
+    <div class="grid4 gap">
+      <div class="stat-card accent-green"><div class="stat-label">Overall</div><div class="stat-num">87%</div><div class="stat-detail">142 / 163 days</div></div>
+      <div class="stat-card"><div class="stat-label">Present</div><div class="stat-num">142</div><div class="stat-detail">Days attended</div></div>
+      <div class="stat-card"><div class="stat-label">Absent</div><div class="stat-num">21</div><div class="stat-detail">Days missed</div></div>
+      <div class="stat-card"><div class="stat-label">OD / Leave</div><div class="stat-num">8</div><div class="stat-detail">Official duty days</div></div>
+    </div>
+
+    <div class="grid2 gap">
+      <div class="card">
+        <div class="section-title">Subject-wise Attendance</div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Subject</th><th>Conducted</th><th>Attended</th><th>%</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Machine Learning</strong></td><td>42</td><td>40</td><td><strong>95%</strong></td><td><span class="badge badge-green">Safe</span></td></tr>
+              <tr><td><strong>Computer Networks</strong></td><td>38</td><td>34</td><td><strong>89%</strong></td><td><span class="badge badge-green">Safe</span></td></tr>
+              <tr><td><strong>Software Engineering</strong></td><td>36</td><td>30</td><td><strong>83%</strong></td><td><span class="badge badge-amber">Warning</span></td></tr>
+              <tr><td><strong>Database Systems</strong></td><td>40</td><td>36</td><td><strong>90%</strong></td><td><span class="badge badge-green">Safe</span></td></tr>
+              <tr><td><strong>Cloud Computing</strong></td><td>32</td><td>25</td><td><strong>78%</strong></td><td><span class="badge badge-red">Risk</span></td></tr>
+              <tr><td><strong>Project Work</strong></td><td>24</td><td>22</td><td><strong>91%</strong></td><td><span class="badge badge-green">Safe</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card attendance-calendar-card">
+        <div class="section-title">March 2024 — Attendance Calendar</div>
+        <div class="cal-grid">
+          <div class="cal-day-label">S</div><div class="cal-day-label">M</div><div class="cal-day-label">T</div><div class="cal-day-label">W</div><div class="cal-day-label">T</div><div class="cal-day-label">F</div><div class="cal-day-label">S</div>
+          <div class="cal-day cal-empty"></div><div class="cal-day cal-empty"></div><div class="cal-day cal-empty"></div><div class="cal-day cal-empty"></div><div class="cal-day cal-present">1</div><div class="cal-day cal-present">2</div><div class="cal-day cal-holiday">3</div>
+          <div class="cal-day cal-holiday">4</div><div class="cal-day cal-present">5</div><div class="cal-day cal-present">6</div><div class="cal-day cal-absent">7</div><div class="cal-day cal-present">8</div><div class="cal-day cal-present">9</div><div class="cal-day cal-holiday">10</div>
+          <div class="cal-day cal-holiday">11</div><div class="cal-day cal-present">12</div><div class="cal-day cal-present">13</div><div class="cal-day cal-present">14</div><div class="cal-day cal-holiday">15</div><div class="cal-day cal-present">16</div><div class="cal-day cal-holiday">17</div>
+          <div class="cal-day cal-holiday">18</div><div class="cal-day cal-absent">19</div><div class="cal-day cal-present">20</div><div class="cal-day cal-present">21</div><div class="cal-day cal-present">22</div><div class="cal-day cal-present">23</div><div class="cal-day cal-holiday">24</div>
+          <div class="cal-day cal-holiday">25</div><div class="cal-day cal-present">26</div><div class="cal-day cal-present">27</div><div class="cal-day cal-present">28</div><div class="cal-day cal-present">29</div><div class="cal-day cal-present">30</div><div class="cal-day cal-holiday">31</div>
+        </div>
+        <div style="display:flex;gap:16px;margin-top:16px;flex-wrap:wrap">
+          <div style="display:flex;align-items:center;gap:6px;font-size:12px"><div style="width:12px;height:12px;border-radius:3px;background:#e8f5e3"></div> Present</div>
+          <div style="display:flex;align-items:center;gap:6px;font-size:12px"><div style="width:12px;height:12px;border-radius:3px;background:#fdeaea"></div> Absent</div>
+          <div style="display:flex;align-items:center;gap:6px;font-size:12px"><div style="width:12px;height:12px;border-radius:3px;background:#f0ede6"></div> Holiday</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">Attendance Requirement Analysis</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Subject</th><th>Min Required (75%)</th><th>Current</th><th>Classes to Skip (safe)</th><th>Classes to Attend (to reach 75%)</th></tr></thead>
+          <tbody>
+            <tr><td>Machine Learning</td><td>32</td><td>40 (95%)</td><td style="color:var(--accent)"><strong>8 more</strong></td><td>—</td></tr>
+            <tr><td>Computer Networks</td><td>29</td><td>34 (89%)</td><td style="color:var(--accent)"><strong>5 more</strong></td><td>—</td></tr>
+            <tr><td>Software Engineering</td><td>27</td><td>30 (83%)</td><td style="color:var(--accent)"><strong>3 more</strong></td><td>—</td></tr>
+            <tr><td>Database Systems</td><td>30</td><td>36 (90%)</td><td style="color:var(--accent)"><strong>6 more</strong></td><td>—</td></tr>
+            <tr><td>Cloud Computing</td><td>24</td><td>25 (78%)</td><td style="color:var(--accent2)"><strong>1 more</strong></td><td>—</td></tr>
+            <tr><td>Project Work</td><td>18</td><td>22 (91%)</td><td style="color:var(--accent)"><strong>4 more</strong></td><td>—</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== MARKS & GRADES PAGE ===== -->
+  <div class="page" id="page-marks">
+    <div class="page-header">
+      <button class="mobile-menu-btn" onclick="toggleSidebar()" aria-label="Open menu">☰</button>
+      <div>
+        <div class="page-title">Marks & Grades</div>
+        <div class="page-subtitle">Internal assessments, semester exams, and final grades</div>
+      </div>
+    </div>
+
+    <div class="tabs" id="sem-tabs">
+      <div class="tab active" onclick="showTab('sem6','sem-tabs')">Semester VI</div>
+      <div class="tab" onclick="showTab('sem5','sem-tabs')">Semester V</div>
+      <div class="tab" onclick="showTab('sem4','sem-tabs')">Semester IV</div>
+      <div class="tab" onclick="showTab('sem3','sem-tabs')">Semester III</div>
+      <div class="tab" onclick="showTab('sem2','sem-tabs')">Semester II</div>
+      <div class="tab" onclick="showTab('sem1','sem-tabs')">Semester I</div>
+    </div>
+
+    <div class="tab-content active" id="tab-sem6">
+      <div class="grid4 gap">
+        <div class="stat-card"><div class="stat-label">Semester GPA</div><div class="stat-num">8.74</div></div>
+        <div class="stat-card accent-green"><div class="stat-label">Highest Mark</div><div class="stat-num">92</div><div class="stat-detail">Machine Learning</div></div>
+        <div class="stat-card"><div class="stat-label">Total Credits</div><div class="stat-num">24</div></div>
+        <div class="stat-card"><div class="stat-label">Subjects</div><div class="stat-num">6</div></div>
+      </div>
+      <div class="card">
+        <div class="section-title">Detailed Marks — Semester VI</div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Subject</th><th>Code</th><th>IA1</th><th>IA2</th><th>IA Avg</th><th>End Sem</th><th>Total (100)</th><th>Grade</th><th>Credits</th><th>Grade Points</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Machine Learning</strong></td><td style="color:var(--muted)">CS601</td>
+                <td>47</td><td>45</td><td>46</td><td>46</td><td><strong>92</strong></td>
+                <td><span class="gp grade-S">S</span></td><td>4</td><td>40</td>
+              </tr>
+              <tr>
+                <td><strong>Computer Networks</strong></td><td style="color:var(--muted)">CS602</td>
+                <td>42</td><td>43</td><td>42.5</td><td>42.5</td><td><strong>85</strong></td>
+                <td><span class="gp grade-A">A</span></td><td>4</td><td>36</td>
+              </tr>
+              <tr>
+                <td><strong>Software Engineering</strong></td><td style="color:var(--muted)">CS603</td>
+                <td>38</td><td>39</td><td>38.5</td><td>39.5</td><td><strong>78</strong></td>
+                <td><span class="gp grade-B">B+</span></td><td>4</td><td>32</td>
+              </tr>
+              <tr>
+                <td><strong>Database Systems</strong></td><td style="color:var(--muted)">CS604</td>
+                <td>44</td><td>43</td><td>43.5</td><td>44.5</td><td><strong>88</strong></td>
+                <td><span class="gp grade-S">S</span></td><td>4</td><td>40</td>
+              </tr>
+              <tr>
+                <td><strong>Cloud Computing</strong></td><td style="color:var(--muted)">CS605</td>
+                <td>35</td><td>37</td><td>36</td><td>36</td><td><strong>72</strong></td>
+                <td><span class="gp grade-B">B</span></td><td>4</td><td>28</td>
+              </tr>
+              <tr>
+                <td><strong>Project Work</strong></td><td style="color:var(--muted)">CS606</td>
+                <td>—</td><td>—</td><td>—</td><td>—</td><td><strong>90</strong></td>
+                <td><span class="gp grade-S">S</span></td><td>4</td><td>40</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+          <div style="font-size:13px;color:var(--muted)"><strong style="color:var(--text)">Grade Scale:</strong> S(91-100)=10 | A(81-90)=9 | B+(71-80)=8 | B(61-70)=7 | C(51-60)=6 | D(41-50)=5 | F(0-40)=0</div>
+          <button class="dl-btn dl-btn-primary" onclick="downloadMarksheet('VI')">⬇ Download Marksheet</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-content" id="tab-sem5">
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:12px">
+          <div><div class="section-title" style="margin-bottom:4px">Semester V Results</div><div style="font-size:13px;color:var(--muted)">SGPA: 8.90 | Credits: 24 | All Passed</div></div>
+          <button class="dl-btn dl-btn-primary" onclick="downloadMarksheet('V')">⬇ Download Marksheet</button>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Subject</th><th>Code</th><th>Total (100)</th><th>Grade</th><th>Credits</th><th>Grade Points</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Theory of Computation</strong></td><td style="color:var(--muted)">CS501</td><td><strong>91</strong></td><td><span class="gp grade-S">S</span></td><td>4</td><td>40</td></tr>
+              <tr><td><strong>Compiler Design</strong></td><td style="color:var(--muted)">CS502</td><td><strong>88</strong></td><td><span class="gp grade-S">S</span></td><td>4</td><td>40</td></tr>
+              <tr><td><strong>Operating Systems</strong></td><td style="color:var(--muted)">CS503</td><td><strong>84</strong></td><td><span class="gp grade-A">A</span></td><td>4</td><td>36</td></tr>
+              <tr><td><strong>Web Technologies</strong></td><td style="color:var(--muted)">CS504</td><td><strong>90</strong></td><td><span class="gp grade-S">S</span></td><td>4</td><td>40</td></tr>
+              <tr><td><strong>Mobile Computing</strong></td><td style="color:var(--muted)">CS505</td><td><strong>82</strong></td><td><span class="gp grade-A">A</span></td><td>4</td><td>36</td></tr>
+              <tr><td><strong>Mini Project</strong></td><td style="color:var(--muted)">CS506</td><td><strong>95</strong></td><td><span class="gp grade-S">S</span></td><td>4</td><td>40</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-content" id="tab-sem4">
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:12px">
+          <div><div class="section-title" style="margin-bottom:4px">Semester IV Results</div><div style="font-size:13px;color:var(--muted)">SGPA: 8.50 | Credits: 24 | All Passed</div></div>
+          <button class="dl-btn dl-btn-primary" onclick="downloadMarksheet('IV')">⬇ Download Marksheet</button>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Subject</th><th>Code</th><th>Total (100)</th><th>Grade</th><th>Credits</th></tr></thead>
+            <tbody>
+              <tr><td>Design & Analysis of Algorithms</td><td style="color:var(--muted)">CS401</td><td><strong>88</strong></td><td><span class="gp grade-S">S</span></td><td>4</td></tr>
+              <tr><td>Computer Architecture</td><td style="color:var(--muted)">CS402</td><td><strong>80</strong></td><td><span class="gp grade-A">A</span></td><td>4</td></tr>
+              <tr><td>Software Project Management</td><td style="color:var(--muted)">CS403</td><td><strong>85</strong></td><td><span class="gp grade-A">A</span></td><td>4</td></tr>
+              <tr><td>Microprocessors</td><td style="color:var(--muted)">CS404</td><td><strong>76</strong></td><td><span class="gp grade-B">B+</span></td><td>4</td></tr>
+              <tr><td>Elective I</td><td style="color:var(--muted)">CS405</td><td><strong>82</strong></td><td><span class="gp grade-A">A</span></td><td>4</td></tr>
+              <tr><td>Lab</td><td style="color:var(--muted)">CS406</td><td><strong>90</strong></td><td><span class="gp grade-S">S</span></td><td>4</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-content" id="tab-sem3">
+      <div class="card"><div style="text-align:center;padding:40px;color:var(--muted)">
+        <div style="font-size:40px;margin-bottom:12px">📋</div>
+        <div style="font-size:15px;font-weight:500;margin-bottom:8px">Semester III Marksheet</div>
+        <div style="font-size:13px;margin-bottom:20px">SGPA: 8.30 | All subjects cleared</div>
+        <button class="dl-btn dl-btn-primary" onclick="downloadMarksheet('III')">⬇ Download Official Marksheet</button>
+      </div></div>
+    </div>
+
+    <div class="tab-content" id="tab-sem2">
+      <div class="card"><div style="text-align:center;padding:40px;color:var(--muted)">
+        <div style="font-size:40px;margin-bottom:12px">📋</div>
+        <div style="font-size:15px;font-weight:500;margin-bottom:8px">Semester II Marksheet</div>
+        <div style="font-size:13px;margin-bottom:20px">SGPA: 8.10 | All subjects cleared</div>
+        <button class="dl-btn dl-btn-primary" onclick="downloadMarksheet('II')">⬇ Download Official Marksheet</button>
+      </div></div>
+    </div>
+
+    <div class="tab-content" id="tab-sem1">
+      <div class="card"><div style="text-align:center;padding:40px;color:var(--muted)">
+        <div style="font-size:40px;margin-bottom:12px">📋</div>
+        <div style="font-size:15px;font-weight:500;margin-bottom:8px">Semester I Marksheet</div>
+        <div style="font-size:13px;margin-bottom:20px">SGPA: 7.80 | All subjects cleared</div>
+        <button class="dl-btn dl-btn-primary" onclick="downloadMarksheet('I')">⬇ Download Official Marksheet</button>
+      </div></div>
+    </div>
+  </div>
+
+  <!-- ===== PERFORMANCE PAGE ===== -->
+  <div class="page" id="page-performance">
+    <div class="page-header">
+      <button class="mobile-menu-btn" onclick="toggleSidebar()" aria-label="Open menu">☰</button>
+      <div>
+        <div class="page-title">Overall Performance</div>
+        <div class="page-subtitle">Comprehensive academic performance analytics across all semesters</div>
+      </div>
+    </div>
+
+    <div class="grid3 gap">
+      <div class="card" style="text-align:center">
+        <div class="card-label">Cumulative GPA</div>
+        <div style="font-size:52px;font-weight:700;color:var(--accent);line-height:1.1">8.74</div>
+        <div class="card-sub">Out of 10.0</div>
+        <div style="margin-top:12px"><span class="badge badge-green">First Class with Distinction</span></div>
+      </div>
+      <div class="card" style="text-align:center">
+        <div class="card-label">Class Rank</div>
+        <div style="font-size:52px;font-weight:700;color:var(--blue);line-height:1.1">#12</div>
+        <div class="card-sub">Out of 68 students</div>
+        <div style="margin-top:12px"><span class="badge badge-blue">Top 18%</span></div>
+      </div>
+      <div class="card" style="text-align:center">
+        <div class="card-label">Total Credits</div>
+        <div style="font-size:52px;font-weight:700;color:var(--accent2);line-height:1.1">142</div>
+        <div class="card-sub">of 180 required</div>
+        <div style="margin-top:12px"><span class="badge badge-amber">79% Complete</span></div>
+      </div>
+    </div>
+
+    <div class="grid2 gap">
+      <div class="card">
+        <div class="section-title">Semester-wise SGPA</div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Semester</th><th>SGPA</th><th>Credits</th><th>Result</th><th>Trend</th></tr></thead>
+            <tbody>
+              <tr><td>Semester I</td><td><strong>7.80</strong></td><td>24</td><td><span class="badge badge-green">Pass</span></td><td style="color:var(--muted)">—</td></tr>
+              <tr><td>Semester II</td><td><strong>8.10</strong></td><td>24</td><td><span class="badge badge-green">Pass</span></td><td style="color:var(--accent)">▲ +0.30</td></tr>
+              <tr><td>Semester III</td><td><strong>8.30</strong></td><td>24</td><td><span class="badge badge-green">Pass</span></td><td style="color:var(--accent)">▲ +0.20</td></tr>
+              <tr><td>Semester IV</td><td><strong>8.50</strong></td><td>24</td><td><span class="badge badge-green">Pass</span></td><td style="color:var(--accent)">▲ +0.20</td></tr>
+              <tr><td>Semester V</td><td><strong>8.90</strong></td><td>24</td><td><span class="badge badge-green">Pass</span></td><td style="color:var(--accent)">▲ +0.40</td></tr>
+              <tr><td>Semester VI (In Progress)</td><td><strong>8.74</strong></td><td>24</td><td><span class="badge badge-amber">Ongoing</span></td><td style="color:var(--accent3)">▼ −0.16</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="section-title">Strengths & Focus Areas</div>
+        <div style="margin-bottom:20px">
+          <div style="font-size:13px;font-weight:600;color:var(--accent);margin-bottom:10px">⭐ Strongest Subjects</div>
+          <div class="progress-wrap">
+            <div class="progress-header"><span class="progress-label">Mini Project (Sem V)</span><span class="progress-val">95/100</span></div>
+            <div class="progress-bar"><div class="progress-fill fill-green" style="width:95%"></div></div>
+          </div>
+          <div class="progress-wrap">
+            <div class="progress-header"><span class="progress-label">Theory of Computation</span><span class="progress-val">91/100</span></div>
+            <div class="progress-bar"><div class="progress-fill fill-green" style="width:91%"></div></div>
+          </div>
+          <div class="progress-wrap" style="margin-bottom:0">
+            <div class="progress-header"><span class="progress-label">Machine Learning</span><span class="progress-val">92/100</span></div>
+            <div class="progress-bar"><div class="progress-fill fill-green" style="width:92%"></div></div>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:13px;font-weight:600;color:var(--accent3);margin-bottom:10px">⚠ Needs Improvement</div>
+          <div class="progress-wrap">
+            <div class="progress-header"><span class="progress-label">Cloud Computing</span><span class="progress-val">72/100</span></div>
+            <div class="progress-bar"><div class="progress-fill fill-red" style="width:72%"></div></div>
+          </div>
+          <div class="progress-wrap" style="margin-bottom:0">
+            <div class="progress-header"><span class="progress-label">Microprocessors</span><span class="progress-val">76/100</span></div>
+            <div class="progress-bar"><div class="progress-fill fill-amber" style="width:76%"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">Grade Distribution (All Semesters)</div>
+      <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:center">
+        <div style="display:flex;align-items:center;gap:10px;padding:16px 24px;background:var(--card2);border-radius:12px;flex:1;min-width:120px">
+          <div style="font-size:28px;font-weight:700;color:var(--accent)">14</div>
+          <div><div style="font-size:13px;font-weight:600">S Grade</div><div style="font-size:12px;color:var(--muted)">91–100 marks</div></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;padding:16px 24px;background:var(--card2);border-radius:12px;flex:1;min-width:120px">
+          <div style="font-size:28px;font-weight:700;color:var(--blue)">10</div>
+          <div><div style="font-size:13px;font-weight:600">A Grade</div><div style="font-size:12px;color:var(--muted)">81–90 marks</div></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;padding:16px 24px;background:var(--card2);border-radius:12px;flex:1;min-width:120px">
+          <div style="font-size:28px;font-weight:700;color:var(--accent2)">8</div>
+          <div><div style="font-size:13px;font-weight:600">B+ Grade</div><div style="font-size:12px;color:var(--muted)">71–80 marks</div></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;padding:16px 24px;background:var(--card2);border-radius:12px;flex:1;min-width:120px">
+          <div style="font-size:28px;font-weight:700;color:var(--accent3)">4</div>
+          <div><div style="font-size:13px;font-weight:600">B Grade</div><div style="font-size:12px;color:var(--muted)">61–70 marks</div></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;padding:16px 24px;background:var(--card2);border-radius:12px;flex:1;min-width:120px">
+          <div style="font-size:28px;font-weight:700;color:var(--muted)">0</div>
+          <div><div style="font-size:13px;font-weight:600">F Grade</div><div style="font-size:12px;color:var(--muted)">Below 40</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== CERTIFICATES PAGE ===== -->
+  <div class="page" id="page-certificates">
+    <div class="page-header">
+      <button class="mobile-menu-btn" onclick="toggleSidebar()" aria-label="Open menu">☰</button>
+      <div>
+        <div class="page-title">Certificates & Awards</div>
+        <div class="page-subtitle">All your achievements in one place — tap to download</div>
+      </div>
+    </div>
+    <div class="grid3 gap">
+      <div class="cert-card">
+        <div class="cert-icon">🏆</div>
+        <div class="cert-title">Bonafide Certificate</div>
+        <div class="cert-meta">Issued by: Principal's Office · March 2024</div>
+        <button class="cert-btn" onclick="generateCertificate('Bonafide Certificate')">⬇ Download PDF</button>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">📊</div>
+        <div class="cert-title">Consolidated Marksheet</div>
+        <div class="cert-meta">Sem I to V · Issued: January 2024</div>
+        <button class="cert-btn" onclick="generateCertificate('Consolidated Marksheet')">⬇ Download PDF</button>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">🎖️</div>
+        <div class="cert-title">Merit Certificate — Sem V</div>
+        <div class="cert-meta">SGPA 8.90 · Top 10% of batch</div>
+        <button class="cert-btn" onclick="generateCertificate('Merit Certificate')">⬇ Download PDF</button>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">🏅</div>
+        <div class="cert-title">Participation — Hackathon 2023</div>
+        <div class="cert-meta">Smart India Hackathon · September 2023</div>
+        <button class="cert-btn" onclick="generateCertificate('Hackathon Certificate')">⬇ Download PDF</button>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">📜</div>
+        <div class="cert-title">NPTEL Online Course</div>
+        <div class="cert-meta">Introduction to Machine Learning · IIT Madras</div>
+        <button class="cert-btn" onclick="generateCertificate('NPTEL Certificate')">⬇ Download PDF</button>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">🥇</div>
+        <div class="cert-title">Best Project Award</div>
+        <div class="cert-meta">Dept. of CSE · February 2024</div>
+        <button class="cert-btn" onclick="generateCertificate('Best Project Award')">⬇ Download PDF</button>
+      </div>
+    </div>
+    <div id="cert-toast" style="display:none;position:fixed;bottom:32px;right:32px;background:var(--text);color:white;padding:14px 22px;border-radius:10px;font-size:14px;font-weight:500;z-index:9999;animation:fadeIn 0.3s ease"></div>
+  </div>
+
+  <!-- ===== MARKSHEETS PAGE ===== -->
+  <div class="page" id="page-marksheets">
+    <div class="page-header">
+      <button class="mobile-menu-btn" onclick="toggleSidebar()" aria-label="Open menu">☰</button>
+      <div>
+        <div class="page-title">Semester Marksheets</div>
+        <div class="page-subtitle">Download official marksheets for each semester</div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:24px">
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+          <div style="display:flex;align-items:center;gap:16px">
+            <div style="width:48px;height:48px;background:var(--accent);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;color:white">VI</div>
+            <div>
+              <div style="font-weight:600">Semester VI Marksheet</div>
+              <div style="font-size:13px;color:var(--muted)">In Progress · SGPA 8.74 (Provisional)</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center">
+            <span class="badge badge-amber">Provisional</span>
+            <button class="dl-btn dl-btn-secondary" onclick="downloadMarksheet('VI')">⬇ Download</button>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+          <div style="display:flex;align-items:center;gap:16px">
+            <div style="width:48px;height:48px;background:var(--blue);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;color:white">V</div>
+            <div>
+              <div style="font-weight:600">Semester V Marksheet</div>
+              <div style="font-size:13px;color:var(--muted)">Completed · SGPA 8.90 · 24 Credits</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center">
+            <span class="badge badge-green">Verified</span>
+            <button class="dl-btn dl-btn-primary" onclick="downloadMarksheet('V')">⬇ Download</button>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+          <div style="display:flex;align-items:center;gap:16px">
+            <div style="width:48px;height:48px;background:var(--accent2);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--text)">IV</div>
+            <div>
+              <div style="font-weight:600">Semester IV Marksheet</div>
+              <div style="font-size:13px;color:var(--muted)">Completed · SGPA 8.50 · 24 Credits</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center">
+            <span class="badge badge-green">Verified</span>
+            <button class="dl-btn dl-btn-primary" onclick="downloadMarksheet('IV')">⬇ Download</button>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+          <div style="display:flex;align-items:center;gap:16px">
+            <div style="width:48px;height:48px;background:var(--accent3);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;color:white">III</div>
+            <div>
+              <div style="font-weight:600">Semester III Marksheet</div>
+              <div style="font-size:13px;color:var(--muted)">Completed · SGPA 8.30 · 24 Credits</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center">
+            <span class="badge badge-green">Verified</span>
+            <button class="dl-btn dl-btn-primary" onclick="downloadMarksheet('III')">⬇ Download</button>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+          <div style="display:flex;align-items:center;gap:16px">
+            <div style="width:48px;height:48px;background:#888;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;color:white">II</div>
+            <div>
+              <div style="font-weight:600">Semester II Marksheet</div>
+              <div style="font-size:13px;color:var(--muted)">Completed · SGPA 8.10 · 24 Credits</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center">
+            <span class="badge badge-green">Verified</span>
+            <button class="dl-btn dl-btn-primary" onclick="downloadMarksheet('II')">⬇ Download</button>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+          <div style="display:flex;align-items:center;gap:16px">
+            <div style="width:48px;height:48px;background:#aaa;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;color:white">I</div>
+            <div>
+              <div style="font-weight:600">Semester I Marksheet</div>
+              <div style="font-size:13px;color:var(--muted)">Completed · SGPA 7.80 · 24 Credits</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center">
+            <span class="badge badge-green">Verified</span>
+            <button class="dl-btn dl-btn-primary" onclick="downloadMarksheet('I')">⬇ Download</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card" style="text-align:center;padding:24px">
+      <div style="font-size:14px;font-weight:600;margin-bottom:8px">Download All Marksheets</div>
+      <div style="font-size:13px;color:var(--muted);margin-bottom:16px">Get a consolidated PDF of all semester marksheets (Sem I – VI)</div>
+      <button class="dl-btn dl-btn-primary" onclick="downloadMarksheet('ALL')" style="margin:0 auto">⬇ Download Consolidated Marksheet</button>
+    </div>
+  </div>
+
+  <!-- ===== PROFILE PAGE ===== -->
+  <div class="page" id="page-profile">
+    <div class="page-header">
+      <button class="mobile-menu-btn" onclick="toggleSidebar()" aria-label="Open menu">☰</button>
+      <div>
+        <div class="page-title">Personal Details</div>
+        <div class="page-subtitle">Your academic profile and personal information</div>
+      </div>
+    </div>
+    <div class="profile-hero">
+      <div class="profile-avatar-big">ST</div>
+      <div style="flex:1">
+        <div class="profile-name">Student</div>
+        <div class="profile-roll">Roll No: 21CS047 · B.Tech Computer Science & Engineering</div>
+        <div class="profile-tags">
+          <span class="badge badge-green">Active Student</span>
+          <span class="badge badge-blue">Semester VI</span>
+          <span class="badge badge-amber">Merit Scholar</span>
+          <span class="badge badge-gray">Hostel Block C</span>
+        </div>
+      </div>
+      <div>
+        <button class="dl-btn dl-btn-secondary" onclick="downloadMarksheet('PROFILE')">⬇ ID Card</button>
+      </div>
+    </div>
+
+    <div class="detail-grid gap">
+      <div class="detail-item"><div class="detail-key">Full Name</div><div class="detail-val">Student</div></div>
+      <div class="detail-item"><div class="detail-key">Roll Number</div><div class="detail-val">21CS047</div></div>
+      <div class="detail-item"><div class="detail-key">Date of Birth</div><div class="detail-val">15 August 2003</div></div>
+      <div class="detail-item"><div class="detail-key">Gender</div><div class="detail-val">Male</div></div>
+      <div class="detail-item"><div class="detail-key">Institution Email</div><div class="detail-val">student@college.edu.in</div></div>
+      <div class="detail-item"><div class="detail-key">Personal Email</div><div class="detail-val">student.email@example.com</div></div>
+      <div class="detail-item"><div class="detail-key">Mobile</div><div class="detail-val">+91 98765 43210</div></div>
+      <div class="detail-item"><div class="detail-key">Blood Group</div><div class="detail-val">B+</div></div>
+      <div class="detail-item"><div class="detail-key">Department</div><div class="detail-val">Computer Science & Engineering</div></div>
+      <div class="detail-item"><div class="detail-key">Batch / Year</div><div class="detail-val">2021–2025 (IV Year)</div></div>
+      <div class="detail-item"><div class="detail-key">Father's Name</div><div class="detail-val">Ravi Kumar S.</div></div>
+      <div class="detail-item"><div class="detail-key">Mother's Name</div><div class="detail-val">Lakshmi Ravi</div></div>
+      <div class="detail-item"><div class="detail-key">Parent Mobile</div><div class="detail-val">+91 98766 11223</div></div>
+      <div class="detail-item"><div class="detail-key">Aadhar Number</div><div class="detail-val">XXXX-XXXX-3847</div></div>
+      <div class="detail-item"><div class="detail-key">Address</div><div class="detail-val">14, Gandhi Nagar, Chennai — 600 084</div></div>
+      <div class="detail-item"><div class="detail-key">Admission Type</div><div class="detail-val">Merit (TNEA 2021)</div></div>
+    </div>
+
+    <div class="grid2" style="margin-top:20px">
+      <div class="card">
+        <div class="section-title">Academic Summary</div>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div style="display:flex;justify-content:space-between"><span style="color:var(--muted);font-size:14px">CGPA</span><strong>8.74</strong></div>
+          <div style="display:flex;justify-content:space-between"><span style="color:var(--muted);font-size:14px">Semesters Completed</span><strong>5 of 8</strong></div>
+          <div style="display:flex;justify-content:space-between"><span style="color:var(--muted);font-size:14px">Credits Earned</span><strong>142 / 180</strong></div>
+          <div style="display:flex;justify-content:space-between"><span style="color:var(--muted);font-size:14px">Arrears (Current)</span><strong style="color:var(--accent)">0</strong></div>
+          <div style="display:flex;justify-content:space-between"><span style="color:var(--muted);font-size:14px">Discipline</span><strong>No Remarks</strong></div>
+          <div style="display:flex;justify-content:space-between"><span style="color:var(--muted);font-size:14px">Scholarship</span><strong>Merit — ₹25,000/yr</strong></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="section-title">Fee Payment Status</div>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div style="display:flex;justify-content:space-between"><span style="color:var(--muted);font-size:14px">Tuition Fee (2023–24)</span><strong style="color:var(--accent)">Paid ✓</strong></div>
+          <div style="display:flex;justify-content:space-between"><span style="color:var(--muted);font-size:14px">Hostel Fee</span><strong style="color:var(--accent)">Paid ✓</strong></div>
+          <div style="display:flex;justify-content:space-between"><span style="color:var(--muted);font-size:14px">Exam Fee — Sem VI</span><strong style="color:var(--accent)">Paid ✓</strong></div>
+          <div style="display:flex;justify-content:space-between"><span style="color:var(--muted);font-size:14px">Library Fine</span><strong style="color:var(--accent3)">₹50 Pending</strong></div>
+          <div style="display:flex;justify-content:space-between"><span style="color:var(--muted);font-size:14px">Bus Pass</span><strong style="color:var(--accent)">Active ✓</strong></div>
+          <div style="display:flex;justify-content:space-between"><span style="color:var(--muted);font-size:14px">Next Fee Due</span><strong>July 2024</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+</div>
+
+   <script src="dashboard.js"></script>
+</body>
+</html>

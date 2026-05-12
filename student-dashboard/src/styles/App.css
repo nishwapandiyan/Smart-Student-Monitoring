@@ -1,0 +1,138 @@
+
+:root {
+  --bg: #f5f3ee;
+  --card: #ffffff;
+  --card2: #f0ede6;
+  --text: #1a1814;
+  --muted: #6b6660;
+  --accent: #2d5a27;
+  --accent2: #c8a84b;
+  --accent3: #8b3a3a;
+  --blue: #2a4a7a;
+  --border: rgba(26,24,20,0.1);
+  --radius: 16px;
+  --shadow: 0 2px 20px rgba(0,0,0,0.06);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Space Grotesk', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+/* Dashboard Layout */
+.app-container { display: flex; min-height: 100vh; }
+.sidebar { width: 260px; background: var(--text); color: #fff; display: flex; flex-direction: column; position: fixed; height: 100vh; overflow-y: auto; z-index: 100; transition: transform 0.3s ease; }
+.main-content { margin-left: 260px; flex: 1; padding: 32px; min-height: 100vh; transition: margin 0.3s ease; }
+
+@media (max-width: 900px) {
+  .sidebar { width: 220px; }
+  .main-content { margin-left: 220px; padding: 20px; }
+}
+
+@media (max-width: 768px) {
+  .sidebar { transform: translateX(-100%); width: 260px; }
+  .sidebar.open { transform: translateX(0); }
+  .main-content { margin-left: 0; }
+}
+
+/* Auth Styles */
+.auth-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(90deg,#e2e2e2ee,#445eb1);
+}
+
+.auth-container {
+  position: relative;
+  width: 850px;
+  height: 550px;
+  max-width: 95vw;
+  background: #fff;
+  border-radius: 30px;
+  box-shadow: 0 0 30px rgba(0,0,0,.2);
+  overflow: hidden;
+}
+
+.form-box {
+  position: absolute;
+  right: 0;
+  width: 50%;
+  height: 100%;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  color: #333;
+  text-align: center;
+  padding: 40px;
+  z-index: 1;
+  transition: .5s ease-in-out .1s, visibility .1s .1s;
+}
+
+.auth-container.active .form-box.login {
+  transform: translateX(-100%);
+  visibility: hidden;
+}
+
+.auth-container.active .form-box.register {
+  transform: translateX(-100%);
+  visibility: visible;
+}
+
+.form-box.register {
+  visibility: hidden;
+}
+
+.input-box {
+  position: relative;
+  margin: 20px 0;
+}
+
+.input-box input {
+  width: 100%;
+  padding: 13px;
+  background: #f0f0f0;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  color: #0c0b0b;
+}
+
+.btn {
+  width: 100%;
+  height: 48px;
+  background: #3353aa;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: #fff;
+  font-weight: 600;
+}
+
+/* Sidebar Styles */
+.sidebar-header { padding: 28px 24px 20px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.sidebar-logo { font-family: 'Instrument Serif', serif; font-size: 22px; color: var(--accent2); letter-spacing: -0.5px; }
+.sidebar-logo span { display: block; font-family: 'Space Grotesk', sans-serif; font-size: 11px; color: rgba(255,255,255,0.4); letter-spacing: 2px; text-transform: uppercase; margin-top: 2px; }
+
+.nav-item { display: flex; align-items: center; gap: 12px; padding: 11px 24px; cursor: pointer; color: rgba(255,255,255,0.55); transition: all 0.15s; border-left: 3px solid transparent; }
+.nav-item:hover { color: #fff; background: rgba(255,255,255,0.05); }
+.nav-item.active { color: #fff; border-left-color: var(--accent2); background: rgba(200,168,75,0.08); }
+
+/* Common UI Components */
+.card { background: var(--card); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); border: 1px solid var(--border); }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.grid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+
+@media (max-width: 650px) {
+  .grid2, .grid3, .grid4 { grid-template-columns: 1fr; }
+}
+
+.badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 500; }
+.badge-green { background: #e8f5e3; color: #2d6b22; }
+.badge-amber { background: #fef3d8; color: #8a6200; }
+.badge-red { background: #fdeaea; color: #8b2020; }
+.badge-blue { background: #e4eef9; color: #1a3a6e; }
+
+/* ... More styles will be added as needed ... */
