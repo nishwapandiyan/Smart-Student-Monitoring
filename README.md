@@ -44,7 +44,7 @@ Smart-Student-Monitoring-System/
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/your-username/smart-student-monitoring-system.git
+https://nishwapandiyan.github.io/Smart_Student_Monitoring/
 ```
 
 2. Open the project folder.
